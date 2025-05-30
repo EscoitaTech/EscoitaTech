@@ -1,0 +1,70 @@
+services:
+
+  # Gestor de colas de mensajes MQTT
+  mqtt-broker:
+    image: eclipse-mosquitto:2.0
+    container_name: mqtt-broker
+    ports:
+      - "1883:1883"
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+    restart: always
+
+  # Base de datos InfluxDB para almacenar los logs
+  influxdb:
+    image: influxdb:2.7
+    container_name: influxdb
+    ports:
+      - "8086:8086"
+    volumes:
+      - influxdb_data:/var/lib/influxdb2
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=admin123
+      - DOCKER_INFLUXDB_INIT_ORG=my-org
+      - DOCKER_INFLUXDB_INIT_BUCKET=logs
+      - INFLUXDB_TOKEN=EuHWeJqtAv3iw42scK6rLJLJX3_NA5EuYl_Jek3kdqey_BGYC1GbryzIFJvUzPTwb1lP-HmYVp-uUUjZdMlrmQ==
+    restart: always
+
+
+  # Telegraf para recolectar métricas y enviarlas a InfluxDB
+  telegraf:
+    image: telegraf:1.28
+    container_name: telegraf
+    depends_on:
+      - mqtt-broker
+      - influxdb
+    volumes:
+      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    restart: always
+
+  # Grafana para visualizar los datos almacenados en InfluxDB
+  grafana:
+    image: grafana/grafana:10.4.2
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - ./grafana/dashboards:/etc/grafana/provisioning/dashboards-json
+      - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+    depends_on:
+      - influxdb
+    restart: always
+
+  # Aplicación Python que se conecta al broker MQTT y envía logs
+  # python-logger:
+  #   build:
+  #     context: ./mqtt-logger
+  #   container_name: python-logger
+  #   depends_on:
+  #     - mqtt-broker
+  #   restart: always
+
+volumes:
+  influxdb_data:
+  grafana_data:
