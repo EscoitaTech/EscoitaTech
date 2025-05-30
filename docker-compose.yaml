@@ -24,7 +24,7 @@ services:
       - DOCKER_INFLUXDB_INIT_PASSWORD=admin123
       - DOCKER_INFLUXDB_INIT_ORG=my-org
       - DOCKER_INFLUXDB_INIT_BUCKET=logs
-      - INFLUXDB_TOKEN=EuHWeJqtAv3iw42scK6rLJLJX3_NA5EuYl_Jek3kdqey_BGYC1GbryzIFJvUzPTwb1lP-HmYVp-uUUjZdMlrmQ==
+      - INFLUXDB_TOKEN=GInwMs60bWdv5Dvkq9ERQ0UiNjltbYN8ZewVBPTswG8jmMv5Ux-7DFo20wbBMowogpqHJTQYmqHkivYBBGDWUg==
     restart: always
 
 
@@ -55,15 +55,6 @@ services:
     depends_on:
       - influxdb
     restart: always
-
-  # Aplicación Python que se conecta al broker MQTT y envía logs
-  # python-logger:
-  #   build:
-  #     context: ./mqtt-logger
-  #   container_name: python-logger
-  #   depends_on:
-  #     - mqtt-broker
-  #   restart: always
 
 volumes:
   influxdb_data:
