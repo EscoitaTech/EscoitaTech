@@ -48,10 +48,12 @@ services:
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_PROVISIONING_CONTACT_POINTS_PATH=/etc/grafana/provisioning/contact-points
     volumes:
       - ./grafana/dashboards:/etc/grafana/provisioning/dashboards-json
       - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
       - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+      - ./grafana/provisioning/contact-points:/etc/grafana/provisioning/contact-points
     depends_on:
       - influxdb
     restart: always
