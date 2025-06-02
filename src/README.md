@@ -12,3 +12,9 @@ This folder contains the core scripts of the **EscoitaTECH** system, designed to
 | `splitter.py`                     | Splits long audio recordings into fixed-duration segments (chunks) for analysis.                                        |
 | `calibrate_threshold.py`          | Records normal sound segments and automatically calculates a custom anomaly detection threshold for a specific machine. |
 | `inference.py`                    | Performs real-time anomaly detection on a Raspberry                                                                     |
+
+## 🚀 Dependencies installation
+
+```bash
+pip install -r requirements.txt
+```
