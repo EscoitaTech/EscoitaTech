@@ -1,0 +1,6 @@
+numpy
+sounddevice
+librosa
+matplotlib
+paho-mqtt
+tflite-runtime
