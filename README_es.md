@@ -1,4 +1,4 @@
-# EscoitaTECH 👂: Detección de Fallas en Máquinas Soplantes de Depuradoras mediante IA 🚰🤖
+# EscoitaTECH 👂: Detección de Fallas en Máquinas Soplantes de Depuradoras mediante IA 🚰🤖 
 
 ## Introducción 🌱
 En las estaciones depuradoras, las máquinas soplantes desempeñan un papel crucial en garantizar la oxigenación adecuada para los procesos biológicos. Estas máquinas están sometidas a condiciones de trabajo intensivas que, con el tiempo, pueden provocar desgaste o fallos internos. La detección temprana de estas anomalías es esencial para prevenir paradas no planificadas, reparaciones costosas y riesgos para la operación continua de la planta.
