@@ -35,11 +35,13 @@
               "options": {
                 "anomalo": {
                   "color": "red",
-                  "index": 1
+                  "index": 1,
+                  "text": "anomalo"
                 },
                 "normal": {
                   "color": "green",
-                  "index": 0
+                  "index": 0,
+                  "text": "normal"
                 }
               },
               "type": "value"
@@ -51,36 +53,33 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
-          },
-          "unit": "short"
+          }
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 11,
-        "w": 9,
+        "h": 8,
+        "w": 8,
         "x": 0,
         "y": 0
       },
-      "id": 2,
+      "id": 25,
       "options": {
         "colorMode": "background",
         "graphMode": "area",
-        "justifyMode": "auto",
+        "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": [],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "/^_value$/",
-          "values": true
+          "values": false
         },
         "showPercentChange": false,
-        "textMode": "value",
+        "textMode": "auto",
         "wideLayout": true
       },
       "pluginVersion": "10.4.2",
@@ -90,11 +89,163 @@
             "type": "influxdb",
             "uid": "influxdb-logs"
           },
-          "query": "from(bucket: \"logs\")\r\n  |> range(start: -5m)\r\n  |> filter(fn: (r) => r._measurement == \"mqtt_logs\")\r\n  |> filter(fn: (r) => r._field == \"distancia\")\r\n  |> group()\r\n  |> sort(columns: [\"_time\"], desc: true)\r\n  |> limit(n:1)\r\n  |> map(fn: (r) => ({ r with _value: r.estado }))\r\n  |> keep(columns: [\"_value\"])",
-          "refId": "B"
+          "query": "from(bucket: \"logs\")\r\n  |> range(start: -5m)\r\n  |> filter(fn: (r) => r._measurement == \"mqtt_logs\")\r\n  |> filter(fn: (r) => r.machine_id == \"fan_01\")\r\n  |> filter(fn: (r) => r._field == \"estado\")\r\n  |> sort(columns: [\"_time\"], desc: true)\r\n  |> limit(n: 1)\r\n  |> keep(columns: [\"_value\"])\r\n",
+          "refId": "A"
         }
       ],
-      "title": "Color del último log",
+      "title": "fan_01 status",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "influxdb-logs"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "anomalo": {
+                  "color": "red",
+                  "index": 1,
+                  "text": "anomalo"
+                },
+                "normal": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "normal"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 0
+      },
+      "id": 26,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^_value$/",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "influxdb-logs"
+          },
+          "query": "from(bucket: \"logs\")\r\n  |> range(start: -5m)\r\n  |> filter(fn: (r) => r._measurement == \"mqtt_logs\")\r\n  |> filter(fn: (r) => r.machine_id == \"fan_02\")\r\n  |> filter(fn: (r) => r._field == \"estado\")\r\n  |> sort(columns: [\"_time\"], desc: true)\r\n  |> limit(n: 1)\r\n  |> keep(columns: [\"_value\"])\r\n",
+          "refId": "A"
+        }
+      ],
+      "title": "fan_02 status",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "influxdb-logs"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "anomalo": {
+                  "color": "red",
+                  "index": 1,
+                  "text": "anomalo"
+                },
+                "normal": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "normal"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 0
+      },
+      "id": 27,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^_value$/",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "influxdb-logs"
+          },
+          "query": "from(bucket: \"logs\")\r\n  |> range(start: -5m)\r\n  |> filter(fn: (r) => r._measurement == \"mqtt_logs\")\r\n  |> filter(fn: (r) => r.machine_id == \"fan_03\")\r\n  |> filter(fn: (r) => r._field == \"estado\")\r\n  |> sort(columns: [\"_time\"], desc: true)\r\n  |> limit(n: 1)\r\n  |> keep(columns: [\"_value\"])\r\n",
+          "refId": "A"
+        }
+      ],
+      "title": "fan03_status",
       "type": "stat"
     },
     {
@@ -130,10 +281,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 11,
-        "w": 15,
-        "x": 9,
-        "y": 0
+        "h": 12,
+        "w": 24,
+        "x": 0,
+        "y": 8
       },
       "id": 1,
       "options": {
@@ -150,7 +301,7 @@
         "sortBy": [
           {
             "desc": true,
-            "displayName": "Time"
+            "displayName": "_time"
           }
         ]
       },
@@ -161,7 +312,7 @@
             "type": "influxdb",
             "uid": "influxdb-logs"
           },
-          "query": "from(bucket: \"logs\")\r\n  |> range(start: -1d)\r\n  |> filter(fn: (r) => r._measurement == \"mqtt_logs\")\r\n  |> filter(fn: (r) => r._field == \"distancia\")",
+          "query": "import \"influxdata/influxdb/schema\"\r\nlogs = from(bucket: \"logs\")\r\n  |> range(start: -1d)\r\n  |> filter(fn: (r) => r._measurement == \"mqtt_logs\")\r\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n  |> keep(columns: [\"_time\", \"machine_id\", \"estado\", \"distancia\"])\r\nlogs\r\n",
           "refId": "A"
         }
       ],
@@ -188,6 +339,6 @@
   "timezone": "browser",
   "title": "MQTT Logs Dashboard",
   "uid": "mqtt-logs-dashboard",
-  "version": 6,
+  "version": 8,
   "weekStart": ""
 }
