@@ -14,4 +14,4 @@ datasources:
       defaultBucket: logs
       tlsSkipVerify: true
     secureJsonData:
-      token: GInwMs60bWdv5Dvkq9ERQ0UiNjltbYN8ZewVBPTswG8jmMv5Ux-7DFo20wbBMowogpqHJTQYmqHkivYBBGDWUg==
+      token: QL0itvNiQR_n0vVu8L59V1u6bWQ5FUBRVtTGHjym_UNDx4m-MD5kqxfwHVmpe_nV8l6ra6gep_Xmw37g23JmUQ==
