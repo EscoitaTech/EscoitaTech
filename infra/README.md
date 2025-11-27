@@ -1,23 +1,3 @@
-# Infraestructura del proyecto EscoitaTech
-
-Esta carpeta contiene los recursos y configuraciones necesarias para la infraestructura del proyecto. Aquí encontrarás los servicios y archivos clave para el despliegue y monitorización:
-
-## Estructura
-
-- **docker/**
-  - `docker-compose.yaml`: Orquestación de servicios con Docker Compose.
-  - **grafana/**
-    - `dashboards/`: Dashboards JSON para la visualización en Grafana.
-    - `provisioning/`:
-      - `contact-points/`: Configuración de alertas (Discord, Telegram).
-      - `dashboards/`: Configuración de dashboards para aprovisionamiento automático.
-      - `datasources/`: Configuración de fuentes de datos para Grafana.
-  - **mosquitto/**
-    - `config/`: Configuración del broker MQTT (mosquitto.conf).
-  - **telegraf/**
-    - `telegraf.conf`: Configuración de Telegraf para la recolección de métricas.
-
-
 # EscoitaTech Project Infrastructure
 
 This folder contains the resources and configuration needed for the project infrastructure. Here you will find the key services and files for deployment and monitoring:
@@ -51,7 +31,16 @@ This folder contains the resources and configuration needed for the project infr
    ```sh
    docker-compose up -d
    ```
-3. Access Grafana to view dashboards and metrics.
+3. Connect to influxdb and generate a new token with the minimal permissions:
+  3.1. Bucket `logs` with read and write
+  3.2. Telegraf with read and write
+
+4. Copy the api token and replace in the config related to the following services:
+  4.1. Grafana: [datasources.yaml](docker\grafana\provisioning\datasources\datasources.yaml?plain=1#L17)
+  4.2. Telegraf: [telegraf.conf](docker\telegraf\telegraf.conf?plain=1#L18)
+  4.3. InfluxDB: [docker-compose.yaml](docker\docker-compose.yaml?plain=1#L27)
+
+Access Grafana to view dashboards and metrics.
 
 ## Services and How to Connect
 
