@@ -24,7 +24,7 @@ services:
       - DOCKER_INFLUXDB_INIT_PASSWORD=admin123
       - DOCKER_INFLUXDB_INIT_ORG=my-org
       - DOCKER_INFLUXDB_INIT_BUCKET=logs
-      - INFLUXDB_TOKEN=QL0itvNiQR_n0vVu8L59V1u6bWQ5FUBRVtTGHjym_UNDx4m-MD5kqxfwHVmpe_nV8l6ra6gep_Xmw37g23JmUQ== 
+      - INFLUXDB_TOKEN=<add your influxdb token here>
     restart: always
 
 
